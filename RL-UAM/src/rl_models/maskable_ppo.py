@@ -44,4 +44,4 @@ def maskable_ppo(log_dir, tensorboard_log_dir):
 
     model.save("./model/masked_ppo_vertisim")
 
-    model.learn(total_timesteps=1024*100, callback=[checkpoint_callback], log_interval=1)
+    model.learn(total_timesteps=1024*1000, callback=[checkpoint_callback], log_interval=1)
