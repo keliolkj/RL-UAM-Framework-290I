@@ -17,15 +17,14 @@
             "time_to_arrival",
             "num_passengers",
             "status",
-            "is_process_completed",
-            "wind_speed",
-            "wind_direction"
+            "is_process_completed"
         ],
         "fleet_rebalancing": true,
         "save_trajectories": false,
         "only_aircraft_simulation": false,
         "network_simulation": true,
-        "verbose": false
+        "verbose": false,
+        "training_data_collection": false
     },
     "sim_mode": {
         "ondemand": false,
@@ -40,9 +39,10 @@
         "soc_adjustment": null,
         "num_vertiport_state_variables": 3,
         "num_aircraft_state_variables": 7,
-        "num_environmental_state_variables": 2,
+        "num_environmental_state_variables": 0,
         "num_additional_state_variables": 1,
         "num_actions": 3,
+        "soc_increment": 10,
         "stopping_events": [
             "passenger_arrival_event",
             "aircraft_parking_pad_arrival_event",
@@ -57,20 +57,21 @@
         "truncation": true,
         "reward_function_parameters": {
             "waiting_time_penalty": -1,
-            "trip_reward": 200,
-            "flight_cost": -10,
+            "trip_reward": 15,
+            "flight_cost": -1,
             "spill_cost": -1000,
             "truncation_penalty": -100000,
-            "completion_reward": 0
+            "completion_reward": 0,
+            "charge_reward": 1            
         }
     },
     "network_and_demand_params": {
-        "vertiport_network_file_path": "input/network/network_SFO_MV.csv",
-        "vertiport_layout_file_path": "input/vertiport_layouts/vertiport_layout.xls",
+        "vertiport_network_file_path": "vertisim/vertisim/input/network/network_SFO_MV.csv",
+        "vertiport_layout_file_path": "vertisim/vertisim/input/vertiport_layouts/vertiport_layout.xls",
         "charge_schedule_file_path": null,
         "flight_schedule_file_path": null,
         "passenger_schedule_file_path": null,
-        "passenger_arrival_rates_path": "input/passenger/passenger_arrival_rates_sfo_mv.csv",
+        "passenger_arrival_rates_path": "vertisim/vertisim/input/passenger/passenger_arrival_rates_sfo_mv.csv",
         "demand_probabilities": null,
         "vertiports": {
             "SFO": {
@@ -131,9 +132,9 @@
         "holding_unit_capacity": 20, 
         "cruise_altitude": 450,  
         "static_wind": false, 
-        "wind_magnitude": 15, 
-        "wind_angle": 3.14159, 
-        "wind_data_file_path": "input/airspace/SFBayArea_wind_data.csv"
+        "wind_magnitude_mph": 15, 
+        "wind_angle_degrees": 3.14159, 
+        "wind_data_file_path": "vertisim/vertisim/input/airspace/SFBayArea_wind_data.csv"      
     },
     "passenger_params": {
         "randomize_constants": false,
@@ -210,7 +211,7 @@
             },
             "max_val_in_dist": null
         },
-        "aircraft_energy_consumption_data_folder_path": "input/aircraft/energy_consumption",
+        "aircraft_energy_consumption_data_folder_path": "vertisim/vertisim/input/aircraft/energy_consumption",
         "min_init_soc": 20,
         "max_init_soc": 80,
         "min_reserve_soc": 40

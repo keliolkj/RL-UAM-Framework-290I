@@ -43,12 +43,19 @@ class VertiSimEnvWrapper(gym.Env):
                               n_aircraft_state_variables, 
                               n_environmental_state_variables,
                               n_additional_state_variables):
-        total_state_variables = (
-            n_vertiports * n_vertiport_state_variables +
-            n_aircraft * n_aircraft_state_variables +
-            n_vertiports * (n_environmental_state_variables+1) +
-            n_additional_state_variables
-        )
+        if n_environmental_state_variables == 0:
+            total_state_variables = (
+                n_vertiports * n_vertiport_state_variables +
+                n_aircraft * n_aircraft_state_variables +
+                n_additional_state_variables
+            )
+        else:
+            total_state_variables = (
+                n_vertiports * n_vertiport_state_variables +
+                n_aircraft * n_aircraft_state_variables +
+                n_vertiports * (n_environmental_state_variables+1) +
+                n_additional_state_variables
+            )
 
         return gym.spaces.Box(low=0, high=np.inf, shape=(total_state_variables,), dtype=np.float64)
     
@@ -60,7 +67,7 @@ class VertiSimEnvWrapper(gym.Env):
 
         # Convert actions
         action = self._convert_actions(action)
-        # print(f"RL called step with action: {action}. Type: {type(action)}")
+        # print(f"RL called step with action: {action}")
 
         for attempt in range(max_retries):
             try:
