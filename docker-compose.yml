@@ -13,7 +13,7 @@ services:
 
 
   vertisim_service:
-    image: eminburakonat/vertisim:latest
+    image: eminburakonat/vertisim:multi_arch
     ports:
       - "5001:5001"
     networks:
